@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
+import { LoginData, ExpectedText } from '../fixtures/testData';
 
 test.describe('Login Page', () => {
 
@@ -15,9 +16,9 @@ test.describe('Login Page', () => {
     test('should show error with invalid credentials', async ({ page }) => {
         const loginPage = new LoginPage(page);
         await loginPage.navigate();
-        await loginPage.login('invalid@test.com', 'wrongpassword');
+        await loginPage.login(LoginData.invalidUser.email, LoginData.invalidUser.password);
         const error = await loginPage.getErrorMessage();
-        expect(error).toContain('Your email or password is incorrect');
+        expect(error).toContain(ExpectedText.loginError);
     });
 
     test('should show error with empty fields', async ({ page }) => {

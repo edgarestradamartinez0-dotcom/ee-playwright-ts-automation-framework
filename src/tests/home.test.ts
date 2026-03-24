@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { HomePage } from '../pages/HomePage';
+import { ExpectedText } from '../fixtures/testData';
 
 test.describe('Home Page', () => {
 
@@ -7,7 +8,7 @@ test.describe('Home Page', () => {
         const homePage = new HomePage(page);
         await homePage.navigate();
         const title = await homePage.getTitle();
-        expect(title).toBe('Automation Exercise');
+        expect(title).toBe(ExpectedText.homeTitle);
     });
 
     test('should display the site logo', async ({ page }) => {
